@@ -3,15 +3,36 @@ import { Kanit } from 'next/font/google'
 import BreachCheck from '@/components/BreachCheck'
 import BreachInfo from '@/components/BreachInfo'
 import { useState } from 'react'
+import { Toaster } from '@/components/ui/toaster'
+import Link from 'next/link'
 
 const kanit = Kanit({ weight: '400', subsets: ['latin'] })
 
+export interface breachedDataType {
+  name?: Set<string>;
+  phone?: Set<string>;
+  dob?: Set<string>;
+  address?: Set<string>;
+  email?: Set<string>;
+  plaintext_password?: Set<string>;
+  ip_address?: Set<string>;
+}
+
 export default function Home() {
   const [breachCount, setBreachCount] = useState(0);
-
+  const [breachData, setBreachData] = useState({
+    "name": new Set(),
+    "phone": new Set(),
+    "dob": new Set(),
+    "address": new Set(),
+    "email": new Set(),
+    "password_plaintext": new Set(),
+    "ip_address": new Set()
+  })
   return (
+    <>
     <main
-      className={`flex min-h-screen flex-row justify-between p-24 ${kanit.className}`}
+      className={`min-h-screen justify-between p-24 ${kanit.className}`}
     >
       {/* <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
         <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
@@ -118,8 +139,15 @@ export default function Home() {
           </p>
         </a>
       </div> */}
-      <BreachCheck setBreachCount={setBreachCount} />
-      <BreachInfo breachCount={breachCount} />
+      <div className='flex flex-row'>
+        <BreachCheck setBreachCount={setBreachCount} setBreachData={setBreachData} breachData={breachData} />
+        <BreachInfo breachCount={breachCount} breachData={breachData} />
+      </div>
+      <Toaster />
+      <div className='flex-grow flex items-end justify-center pb-4'>
+          <p className='text-center font-bold mt-8'>Powered by <Link href="https://pangea.cloud/" className='text-indigo-700'>Pangea</Link></p>
+      </div>
     </main>
+    </>
   )
 }
