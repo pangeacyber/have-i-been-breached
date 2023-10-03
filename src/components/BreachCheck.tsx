@@ -5,6 +5,8 @@ import { Button } from './ui/button';
 import { breachedDataType } from '@/pages';
 import { Checkbox } from './ui/checkbox';
 import { useToast } from './ui/use-toast';
+import { Switch } from "@/components/ui/switch"
+import { Label } from './ui/label';
 
 interface BreachCheckProps {
     setBreachCount: Function;
@@ -15,6 +17,7 @@ interface BreachCheckProps {
 const BreachCheck = ({setBreachCount, setBreachData, breachData}: BreachCheckProps) => {
   const [email, setEmail] = useState('');
   const [termsChecked, setTermsChecked] = useState(true);
+  const [hiddenInputEmailState, setHiddenInputEmailState] = useState(false);
   const ref = React.useRef(null);
   const { toast } = useToast()
 
@@ -45,25 +48,25 @@ const BreachCheck = ({setBreachCount, setBreachData, breachData}: BreachCheckPro
   
 
   const handleSubmit = async () => {
-    if(termsChecked === true) {
-      await fetch('/api/log', {
-        method: 'POST', 
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            email: email,
-        }),
-        })
-        .then(response => response.json()) 
-        .then(data => {
-            toast({
-                title: `Successfully enrolled in the Raffle 🎉`,
-            })
-        })
-        .catch((error) => console.error('Error:', error));
+    // if(termsChecked === true) {
+    //   await fetch('/api/log', {
+    //     method: 'POST', 
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({
+    //         email: email,
+    //     }),
+    //     })
+    //     .then(response => response.json()) 
+    //     .then(data => {
+    //         toast({
+    //             title: `Successfully accepted terms 🎉`,
+    //         })
+    //     })
+    //     .catch((error) => console.error('Error:', error));
 
-    }
+    // }
 
     setBreachData({
         "name": new Set(),
@@ -111,26 +114,22 @@ const BreachCheck = ({setBreachCount, setBreachData, breachData}: BreachCheckPro
   return (
     <div className="w-1/3 mr-4">
       <h2 className="text-xl font-semibold mb-4">Have I been breached?</h2>
-      {/* <input
-        type="text"
-        placeholder="Enter your email"
-        className="w-full p-2 mb-2 border rounded"
-
-      />
-      <button
-        onClick={handleSubmit}
-        className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
-      >
-        Check
-      </button> */}
         <div className="flex w-full max-w-sm items-center space-x-2 mb-2">
-            <Input type="email" placeholder="Email"
+            <Input type={hiddenInputEmailState === true ? 'password' : 'email'} placeholder="Email"
                     value={email}
                     onChange={handleEmailChange} />
             <Button type="submit"
             onClick={handleSubmit}>Check 🕵️‍♀️</Button>
         </div>
-        <div className="items-top flex space-x-2">
+
+        <div className="flex items-center space-x-2">
+          <Switch id="hide-email" onCheckedChange={checked => {
+            setHiddenInputEmailState(!hiddenInputEmailState)
+          }} />
+          <Label htmlFor="hide-email">Hide Email 🙈</Label>
+        </div>
+        {/* 
+      <div className="items-top flex space-x-2">
       <Checkbox id="terms1" ref={ref} checked={termsChecked} onCheckedChange={checked => {
         setTermsChecked(!termsChecked)
       }} />
@@ -139,21 +138,17 @@ const BreachCheck = ({setBreachCount, setBreachData, breachData}: BreachCheckPro
             htmlFor="terms1"
             className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
           >
-            Sign up for LEGO Raffle 🎟️
+          Uncomment if you're storing email addresses
           </label>
           <p className="text-sm text-muted-foreground">
             You agree to let Pangea store your email for the purposes of the raffle.
           </p>
-        </div>
+        </div> 
       </div>
+      */}
 
-
-      {/* Display breach data here once available */}
-      {/* {breachData && (
-        <div className="mt-4">
-        </div>
-      )} */}
     </div>
+    
   );
 };
 
