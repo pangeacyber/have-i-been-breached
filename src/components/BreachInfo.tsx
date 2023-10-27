@@ -11,7 +11,7 @@ import {
     TableHeader,
     TableRow,
   } from "./ui/table"  
-import { breachedDataType } from '@/pages';
+import { breachedDataType } from '@/pages/chat';
 import { Button } from './ui/button';
 import { useToast } from './ui/use-toast';
 

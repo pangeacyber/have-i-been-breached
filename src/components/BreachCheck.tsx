@@ -2,7 +2,7 @@
 import React, { ChangeEvent, useState } from 'react';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
-import { breachedDataType } from '@/pages';
+import { breachedDataType } from '@/pages/chat';
 import { Checkbox } from './ui/checkbox';
 import { useToast } from './ui/use-toast';
 import { Switch } from "@/components/ui/switch"
