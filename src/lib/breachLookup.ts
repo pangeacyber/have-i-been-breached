@@ -71,8 +71,9 @@ const PangeaVPNCheck = async (ip: string) => {
 const PangeaLogEmail = (async (email: string) => {
   
     const data = {
-      email: email,
-      conference_id: "ijs23"
+      "message": "Email: " + email,
+      "source": "workshop",
+      "timestamp": new Date(Date.now()).toISOString()
     };
   
     try {

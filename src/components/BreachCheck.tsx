@@ -48,25 +48,24 @@ const BreachCheck = ({setBreachCount, setBreachData, breachData}: BreachCheckPro
   
 
   const handleSubmit = async () => {
-    // if(termsChecked === true) {
-    //   await fetch('/api/log', {
-    //     method: 'POST', 
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({
-    //         email: email,
-    //     }),
-    //     })
-    //     .then(response => response.json()) 
-    //     .then(data => {
-    //         toast({
-    //             title: `Successfully accepted terms 🎉`,
-    //         })
-    //     })
-    //     .catch((error) => console.error('Error:', error));
-
-    // }
+     if(termsChecked === true) {
+       await fetch('/api/log', {
+         method: 'POST', 
+         headers: {
+             'Content-Type': 'application/json',
+         },
+         body: JSON.stringify({
+             email: email,
+         }),
+         })
+         .then(response => response.json()) 
+         .then(data => {
+             toast({
+                 title: `Successfully accepted terms 🎉`,
+             })
+         })
+         .catch((error) => console.error('Error:', error));
+     }
 
     setBreachData({
         "name": new Set(),
@@ -128,24 +127,20 @@ const BreachCheck = ({setBreachCount, setBreachData, breachData}: BreachCheckPro
           }} />
           <Label htmlFor="hide-email">Hide Email 🙈</Label>
         </div>
-        {/* 
+        {
       <div className="items-top flex space-x-2">
+         
       <Checkbox id="terms1" ref={ref} checked={termsChecked} onCheckedChange={checked => {
         setTermsChecked(!termsChecked)
       }} />
       <div className="grid gap-1.5 leading-none">
-          <label
-            htmlFor="terms1"
-            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-          >
-          Uncomment if you're storing email addresses
-          </label>
+          
           <p className="text-sm text-muted-foreground">
             You agree to let Pangea store your email for the purposes of the raffle.
           </p>
         </div> 
       </div>
-      */}
+      }
 
     </div>
     

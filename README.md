@@ -31,7 +31,7 @@ If running this app locally, add http://localhost:3000 to the redirect list. Thi
 
 > NOTE: By going to **Customize > View project branding**, you'll be able to customize your login page
 
-7. Enable **Secure Audit Log** with the default configuration. Remember to extend the existing token, not to create a new one.
+7. Enable **Secure Audit Log** with the default configuration. The only required fields though should be message and timestamp. Remember to extend the existing token, not to create a new one.
 
 8. Enable **IP Intel** and **User Intel** as well. Remember to extend the existing token, not to create a new one.
 
