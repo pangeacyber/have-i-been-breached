@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { Kanit } from 'next/font/google'
 import BreachCheck from '@/components/BreachCheck'
 import BreachInfo from '@/components/BreachInfo'
@@ -21,13 +20,13 @@ export interface breachedDataType {
 export default function Home() {
   const [breachCount, setBreachCount] = useState(0);
   const [breachData, setBreachData] = useState({
-    "name": new Set(),
-    "phone": new Set(),
-    "dob": new Set(),
-    "address": new Set(),
-    "email": new Set(),
-    "password_plaintext": new Set(),
-    "ip_address": new Set()
+    "name": new Set<string>(),
+    "phone": new Set<string>(),
+    "dob": new Set<string>(),
+    "address": new Set<string>(),
+    "email": new Set<string>(),
+    "password_plaintext": new Set<string>(),
+    "ip_address": new Set<string>()
   })
   return (
     <>
